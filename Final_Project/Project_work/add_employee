@@ -1,0 +1,21 @@
+class Employee_add:
+
+    def add(self, cursor, F_name, M_name, L_name, Phn_n, Email, Gender, Pass, db):
+        query = """
+        INSERT INTO Employees (F_name, M_name, L_name, Phn_n, Email, Gender, Pass)
+        VALUES(%s, %s, %s, %s, %s, %s, %s)
+        """
+
+        cursor.execute(query, (F_name, M_name, L_name, Phn_n, Email, Gender, Pass))
+        db.commit()
+
+        print("Employee New Entry Detected !!!")
+
+        query2 = """
+        SELECT Emp_id FROM Employee
+        ORDER BY Emp_id DESC LIMIT 1;
+        """
+
+        cursor.execute(query2)
+        ans = cursor.fetchall()
+        return ans
